@@ -20,6 +20,7 @@ class Primitive {
         $this->value = $value;
         $this->setType();
         $this->setTypeValue();
+        $this->setSql();
     }
     public function getValue(){
         return $this->value;
@@ -43,7 +44,16 @@ class Primitive {
                 ($this->isFloat() ? self::FLOAT :
                     ($this->isBool() ? self::BOOL : self::UNDEFINED)));
                     
-    }    
+    }   
+    private function setSql(){
+        switch($this->typeValue){
+            case self::STRING :
+                $this->sql = ("'{$this->value}'");
+            break;
+            default:
+                $this->sql = $this->value;
+        }
+    } 
     public function isInteger(){
         return is_int($this->value);
     }
@@ -58,7 +68,7 @@ class Primitive {
     }            
 }
 
-$pri = new Primitive(10.1);
+$pri = new Primitive("10");
 echo "String: {$pri->isString()} <br />";
 echo "Integer: {$pri->isInteger()} <br />";
 echo "Float: {$pri->isFloat()} <br />";
