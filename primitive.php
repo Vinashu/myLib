@@ -1,6 +1,8 @@
 <?php 
 header("Content-Type: text/html; charset=UTF-8",true);
 class Primitive {
+    //nome da primitiva
+    private $name;
     //valor da primitiva
     private $value;
     //descritor do tipo da primitiva
@@ -16,18 +18,22 @@ class Primitive {
     const BOOL = 4;
     const UNDEFINED = 9;    
     //construtor
-    public function __construct($value = ""){
-        $this->value = $value;
-        $this->setType();
-        $this->setTypeValue();
-        $this->setSql();
+    public function __construct($value = "", $name = ""){
+        $this->setName($name);
+        $this->setValue($value);
     }
     public function getValue(){
         return $this->value;
     }
     public function setValue($value){
         $this->value = $value;
+        $this->setType();
+        $this->setTypeValue();
+        $this->setSql();        
     }
+    public function setName($name){
+        $this->name = $name; 
+    }    
     public function getType(){
         return $this->type;
     }
@@ -65,10 +71,16 @@ class Primitive {
     }
     public function isBool(){
         return is_bool($this->value);
-    }            
+    }       
+    public function name(){
+        return get_class();
+    }
+    public function nameThis(){
+        return get_class($this);
+    }              
 }
 
-$pri = new Primitive("10");
+$pri = new Primitive(10,"pri");
 echo "String: {$pri->isString()} <br />";
 echo "Integer: {$pri->isInteger()} <br />";
 echo "Float: {$pri->isFloat()} <br />";
@@ -76,4 +88,15 @@ echo "Type: {$pri->getType()}";
 echo "<pre>";
 print_r($pri);
 echo "</pre>";
+echo "{$pri->name()}<br />";
+echo "{$pri->nameThis()}";
+$pri = new Primitive(10);
+echo "<pre>";
+print_r($pri);
+echo "</pre>";
+$pri = new Primitive("0","pri");
+echo "<pre>";
+print_r($pri);
+echo "</pre>";
+//http://php.net/manual/pt_BR/book.classobj.php
 ?>
