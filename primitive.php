@@ -78,8 +78,11 @@ class Primitive {
     public function nameThis(){
         return get_class($this);
     }              
+    public function toString(){
+        return $this->value;
+    }
 }
-
+/*
 $pri = new Primitive(10,"pri");
 echo "String: {$pri->isString()} <br />";
 echo "Integer: {$pri->isInteger()} <br />";
@@ -98,5 +101,6 @@ $pri = new Primitive("0","pri");
 echo "<pre>";
 print_r($pri);
 echo "</pre>";
+*/
 //http://php.net/manual/pt_BR/book.classobj.php
 ?>
