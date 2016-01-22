@@ -1,7 +1,8 @@
 <?php
+require_once("classBanco.php");
 require_once("primitive.php");
 require_once("traitPrimitivizador.php");
-class Teste {
+class Teste extends Banco {
     use Primitivizador;
     public $name = "Rogério";
     public $surName = "Pereira";
@@ -10,7 +11,8 @@ class Teste {
         //aceita como parâmetro array com lista de campos
         //para serem primitivizados, caso contrário 
         //primitivizará todos
-        $this->primitivizar();           
+        $this->primitivizar();
+        $this->gerarSql("tabela");           
     }
 }
 $teste = new Teste();

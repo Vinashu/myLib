@@ -60,6 +60,12 @@ class Primitive {
                 $this->sql = $this->value;
         }
     } 
+    public function getName(){
+        return $this->name;
+    } 
+    public function getSql(){
+        return $this->sql;
+    }     
     public function isInteger(){
         return is_int($this->value);
     }
@@ -71,13 +77,7 @@ class Primitive {
     }
     public function isBool(){
         return is_bool($this->value);
-    }       
-    public function name(){
-        return get_class();
-    }
-    public function nameThis(){
-        return get_class($this);
-    }              
+    }                 
     public function toString(){
         return $this->value;
     }

@@ -6,7 +6,7 @@ class Banco extends Entity{
       protected static $server = "localhost";
       protected static $user = "root";
       protected static $pwd = "";
-      protected static $name = "lol";
+      protected static $nameDB = "lol";
       protected static $res;
       protected static $db_selected;
       
@@ -26,7 +26,7 @@ class Banco extends Entity{
       }
       
       public function selectDb(){
-              $this->db_selected = mysql_select_db(self::$name, $this->db);
+              $this->db_selected = mysql_select_db(self::$nameDB, $this->db);
               if (!$this->db_selected) {
                   die ('Impossível abrir o banco : ' . mysql_error());
               }
@@ -122,6 +122,20 @@ class Banco extends Entity{
            $sql = substr($sql,0,strlen($sql)-1) . ")";
            echo $sql . "<br />";
            */
+    }
+    public function gerarSQL($table){
+           $campos = get_object_vars ($this);
+           $sql = "Insert into " . $table . " (";
+           $sqlI = "";
+           $sqlF = "";
+           foreach ($campos as $campo) {
+             $sqlI .= "{$campo->getName()},";
+             $sqlF .= "{$campo->getSql()},";             
+           }
+           $sqlI = substr($sqlI,0,strlen($sqlI)-1) . ") values (";
+           $sqlF = substr($sqlF,0,strlen($sqlF)-1) . ")";
+           $sql .= $sqlI . $sqlF;
+           echo $sql . "<br />";                    
     }
       //mysql_num_rows() para obter quantas linhas foram retornadas para um comando SELECT ou
       //mysql_affected_rows() para obter quantas linhas foram afetadas por um comando DELETE, INSERT, REPLACE, ou UPDATE.
