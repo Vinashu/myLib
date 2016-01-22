@@ -18,7 +18,14 @@ class Teste {
             $this->$key = new Primitive($value, $key);            
         } 
         */
-        $this->primitivizar();           
+        /*
+        $campos = get_object_vars ($this);
+        $params = array();
+        foreach ($campos as $key => $value) {
+            $params[$key] = $value;
+        } 
+        */        
+        $this->primitivizar($params);           
     }
 }
 
