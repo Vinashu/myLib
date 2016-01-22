@@ -5,30 +5,14 @@ class Teste {
     use Primitivizador;
     public $name = "Rogério";
     public $surName = "Pereira";
-    private $idade = 38;
+    public $idade = 38;
     public function __construct(){
-        /*
-        $this->name = new Primitive($this->name, "name");
-        $this->surName = new Primitive($this->surName, "surName");
-        $this->idade = new Primitive($this->idade, "idade");
-        */           
-        /*
-        $campos = get_object_vars ($this);
-        foreach ($campos as $key => $value) {
-            $this->$key = new Primitive($value, $key);            
-        } 
-        */
-        /*
-        $campos = get_object_vars ($this);
-        $params = array();
-        foreach ($campos as $key => $value) {
-            $params[$key] = $value;
-        } 
-        */        
-        $this->primitivizar($params);           
+        //aceita como parâmetro array com lista de campos
+        //para serem primitivizados, caso contrário 
+        //primitivizará todos
+        $this->primitivizar();           
     }
 }
-
 $teste = new Teste();
 echo "<pre>";
 print_r($teste);
